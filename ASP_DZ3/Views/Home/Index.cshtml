@@ -1,0 +1,53 @@
+﻿@using ASP_DZ3.Models
+@model ASP_DZ3.Models.AccountViewModel
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        @Html.LabelFor(t => t.Login, "Логин:")
+        <br />
+        @Html.TextBoxFor(t => t.Login)
+        <p>
+            @Html.LabelFor(t => t.Password)
+            <br />
+            @Html.PasswordFor(t => t.Password)
+        </p>
+
+        for (int i = 0; i < Model.InfoSources.Count; i++)
+        {
+            <p>
+
+                @Html.CheckBoxFor(m => m.InfoSources[i].IsSelected)
+                @Html.DisplayFor(m => m.InfoSources[i].InfoSource)
+                @Html.HiddenFor(m => m.InfoSources[i].InfoSource)
+            </p>
+
+
+        }
+        <p>Введите пол:</p>
+        @Html.EnumDropDownListFor(m=>m.Sex, "Введите пол")
+        //foreach(Sex)
+        <p>
+            @Html.LabelFor(m => m.About, "О себе:")<br />
+            @Html.TextAreaFor(m => m.About)
+        </p>
+
+        <p><input type="submit" value="Отправить" /></p>
+        @Html.Label("Your selected option: " + Model.Sex)
+
+    }
+</body>
+</html>
